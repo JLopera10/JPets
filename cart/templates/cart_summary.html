@@ -1,89 +1,80 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load humanize %}
 
-{% block content%}
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Carrito de Compras</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Aquí puedes revisar los productos que has agregado a tu carrito.</p>
-        </div>
+{% block content %}
+
+<header class="bg-success py-5 text-white shadow-sm">
+    <div class="container text-center">
+        <h1 class="display-5 fw-bolder">Tu Carrito 🛒</h1>
+        <p class="lead text-white-50">Revisa tus productos antes de finalizar la compra.</p>
     </div>
 </header>
-<br/>
-<div class="container my-5">
-    {% if cart_products %}
-    <div class="card shadow-sm border-0 p-3 rounded-4">
-        {% for product in cart_products %}
-        <div class="d-flex align-items-center justify-content-between border-bottom py-3">
-            
-            <!-- Imagen del producto (pequeña) -->
-            <div class="d-flex align-items-center">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="rounded me-3" style="width: 70px; height: 70px; object-fit: cover;">
-                <div>
-                    <h5 class="mb-0 fw-semibold">{{ product.name }}</h5>
+
+<section class="py-5 bg-light">
+    <br/><br/><br/><br/><br/><br/>
+    <div class="container">
+        {% if cart_products %}
+        <div class="card shadow border-0 rounded-4 p-4">
+            {% for product in cart_products %}
+            <div class="d-flex align-items-center justify-content-between border-bottom py-3 flex-wrap">
+                
+                <!-- Imagen + Nombre -->
+                <div class="d-flex align-items-center mb-2 mb-md-0">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" 
+                         class="rounded me-3 shadow-sm" 
+                         style="width: 80px; height: 80px; object-fit: cover;">
+                    <div>
+                        <h5 class="fw-bold text-success mb-1">{{ product.name }}</h5>
+                        {% if product.is_sale %}
+                            <small class="text-decoration-line-through text-muted">${{ product.price|intcomma }}</small>
+                            <span class="fw-semibold text-dark ms-2">${{ product.sale_price|intcomma }}</span>
+                        {% else %}
+                            <span class="fw-semibold text-dark">${{ product.price|intcomma }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Cantidad + Botones -->
+                <div class="d-flex align-items-center gap-2">
+                    {% csrf_token %}
+                    {% for key, value in quantities.items %}
+                        {% if key == product.id|slugify %}
+                            <input type="number" name="quantity" value="{{ value }}" min="1"
+                                class="form-control form-control-sm text-center no-spin border-success"
+                                style="width: 70px;" id="select{{ product.id }}">
+                        {% endif %}
+                    {% endfor %}
+                    <button type="submit" data-index="{{ product.id }}" class="btn btn-outline-success btn-sm update-cart">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </button>
+                    <button type="submit" data-index="{{ product.id }}" class="btn btn-outline-danger btn-sm delete-product">
+                        <i class="bi bi-trash3"></i>
+                    </button>
                 </div>
             </div>
+            {% endfor %}
 
-            <div class="d-flex align-items-center justify-content-end gap-3">
-                <!-- Cantidad y botón -->
-                {% csrf_token %}
-                {% for key, value in quantities.items %}
-                    {% if key == product.id|slugify %}
-                        <input type="number" name="quantity" value="{{ value }}" min="1"
-                            class="form-control form-control-sm text-center no-spin"
-                            style="width: 70px;" id="select{{ product.id }}">
-                    {% endif %}
-                {% endfor %}
-                <button type="submit" data-index="{{ product.id }}" class="btn btn-outline-primary btn-sm ms-2 update-cart">Actualizar</button>
-                <button type="submit" data-index="{{ product.id }}" class="btn btn-outline-danger btn-sm delete-product">
-                    <i class="bi bi-trash"></i> Eliminar
-                </button>
-                <!-- Precio -->
-                <div class="text-end ms-4">
-                    {% load humanize %}
-                    {% if product.is_sale %}
-                        <p class="mb-0 fw-bold text-success" style="font-size: 1.2rem;">
-                            ${{ product.sale_price|intcomma }}
-                        </p>
-                        <small class="text-muted text-decoration-line-through">
-                            ${{ product.price|intcomma }}
-                        </small>
-                    {% else %}
-                        <p class="mb-0 fw-bold text-dark" style="font-size: 1.2rem;">
-                            ${{ product.price|intcomma }}
-                        </p>
-                    {% endif %}
-                </div>
+            <!-- Total -->
+            <div class="text-end mt-4">
+                <h4 class="fw-bold text-success">Total: ${{ cart_total|intcomma }}</h4>
+                <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-3 px-5">
+                    Finalizar Compra 💸
+                </a>
             </div>
         </div>
-        {% endfor %}
 
-        <!-- Total y botón de compra -->
-        <div class="text-end mt-4">
-            <h4 class="fw-bold">Total: ${{ cart_total|intcomma }}</h4>
-            <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-2">
-                Finalizar Compra 💸
-            </a>
+        {% else %}
+        <div class="text-center my-5">
+            <h5 class="text-muted">Tu carrito está vacío 🐾</h5>
+            <a href="{% url 'home' %}" class="btn btn-outline-success mt-3">Volver a la tienda</a>
         </div>
+        {% endif %}
     </div>
-
-    {% else %}
-    <br/><br/><br/><br/><br/>
-    <div class="text-center mt-5">
-        <h5 class="text-muted">Tu carrito está vacío 🐾</h5>
-        <a href="{% url 'home' %}" class="btn btn-outline-primary mt-3">Volver a la tienda</a>
-    </div>
-    <br/><br/><br/><br/><br/>
-    {% endif %}
-</div>
-
-
+    <br/><br/><br/><br/><br/><br/>
+</section>
 
 <script>
-
 $(document).on('click', '.update-cart', function(e){
     e.preventDefault();
     var productid = $(this).data('index');
@@ -92,23 +83,16 @@ $(document).on('click', '.update-cart', function(e){
         url: '{% url "cart_update" %}',
         data: {
             product_id: productid,
-            product_qty:$('#select' + productid).val(),
+            product_qty: $('#select' + productid).val(),
             csrfmiddlewaretoken: '{{ csrf_token }}',
             action: 'post'
         },
-
-        success: function(response){
-            location.reload();
-        },
-        error: function(xhr, errmsg, err){
-
-        }
+        success: function(){ location.reload(); }
     });
 });
 
 $(document).on('click', '.delete-product', function(e){
     e.preventDefault();
-
     $.ajax({
         type: 'POST',
         url: '{% url "cart_delete" %}',
@@ -117,17 +101,9 @@ $(document).on('click', '.delete-product', function(e){
             csrfmiddlewaretoken: '{{ csrf_token }}',
             action: 'post'
         },
-
-        success: function(response){
-            location.reload();
-        },
-        error: function(xhr, errmsg, err){
-
-        }
+        success: function(){ location.reload(); }
     });
 });
-
 </script>
 
-
-{% endblock%}
+{% endblock %}

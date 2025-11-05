@@ -1,15 +1,68 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block content%}
+{% block content %}
 
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Sobre Nosotros</h1>
-            <p class="lead fw-normal text-white-50 mb-0">En JPets somos unos verdaderos amantes de los animales. Nacimos con la idea de ofrecer los mejores productos para consentir a tus mascotas como se merecen: con amor, calidad y estilo.</p>
-        </div>
-    </div>
+<!-- Header con imagen personalizada -->
+<header 
+  class="py-5 text-white" 
+  style="
+    background-image: url('{% static 'assets/about_banner.jpg' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  "
+>
+  <!-- Capa verde translúcida encima -->
+  <div style="
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(25, 135, 84, 0.85); /* verde Bootstrap semiopaco */
+    ">
+  </div>
+
+  <div class="container px-4 px-lg-5 my-5 text-center" style="position: relative; z-index: 1;">
+    <h1 class="display-4 fw-bold">Sobre Nosotros</h1>
+    <p class="lead fw-normal text-white-50 mb-0">
+      En <strong>JPets</strong> somos verdaderos amantes de los animales. 
+      Nacimos con la idea de ofrecer los mejores productos para consentir a tus mascotas 
+      como se merecen: con amor, calidad y estilo.
+    </p>
+  </div>
 </header>
+
+<!-- Sección principal -->
+<section class="py-5 bg-light">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-5 align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="fw-bold text-success mb-3">Nuestra misión 🐾</h2>
+        <p class="text-muted mb-4">
+          Ofrecer una experiencia única a cada cliente, combinando productos de alta calidad con 
+          una atención cercana, amigable y confiable. Queremos que cada compra sea una muestra 
+          de cariño hacia quienes más alegran nuestros días.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <h2 class="fw-bold text-success mb-3">Nuestros valores 🌱</h2>
+        <ul class="list-unstyled text-muted">
+          <li>❤️ Amor y respeto por los animales</li>
+          <li>💎 Compromiso con la calidad</li>
+          <li>🤝 Honestidad y confianza</li>
+          <li>🚀 Innovación constante</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Frase final -->
+<section class="py-5 bg-success text-white text-center">
+  <div class="container px-4 px-lg-5">
+    <h3 class="fw-bold mb-3">"Más que una tienda, somos parte de tu familia peluda"</h3>
+    <p class="lead mb-0">JPets – Amor en cada producto 🐶🐱</p>
+  </div>
+</section>
 
 {% endblock %}

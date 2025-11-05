@@ -4,14 +4,16 @@
 
 {% block content%}
 <!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Todo para tu peludo, en un solo lugar</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Amor, calidad y estilo para cada mascota.</p>
-        </div>
-    </div>
+<header class="hero-section text-white text-center d-flex align-items-center justify-content-center">
+  <div class="container">
+    <h1 class="display-4 fw-bold mb-3">Todo para tu peludo, en un solo lugar</h1>
+    <p class="lead mb-4">Amor, calidad y estilo para cada mascota 🐾</p>
+    <a href="{% url 'about' %}" class="btn btn-success btn-lg rounded-pill shadow-sm">
+        Quienes Somos?
+    </a>
+  </div>
 </header>
+
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -76,4 +78,43 @@
         </div>
     </div>
 </section>
+
+<style>
+.hero-section {
+  background: 
+    linear-gradient(rgba(21, 71, 52, 0.6), rgba(21, 71, 52, 0.6)),
+    url("{% static 'assets/banner_pets.jpg' %}") center/cover no-repeat;
+  height: 75vh;
+  color: #fff;
+}
+
+.hero-section h1 {
+  font-size: 2.8rem;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #e9f5ee;
+}
+
+.hero-section .btn {
+  background-color: #43a047;
+  border: none;
+  padding: 0.8rem 2rem;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-section .btn:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
+
+.btn-outline-dark {
+  color: #212529 !important;
+  border-color: #212529 !important;
+}
+
+</style>
+
 {% endblock%}

@@ -10,6 +10,7 @@ class Order(models.Model):
     amount_paid = models.IntegerField(default=0)
     date_ordered = models.DateTimeField(auto_now_add=True)
     shipped = models.BooleanField(default=False)
+    shipped_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"Order - {str(self.id)}"

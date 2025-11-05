@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import redirect, render
 from cart.cart import Cart
 from store.models import Profile, Product
@@ -9,6 +10,13 @@ from django.contrib.auth.models import User
 def not_shipped_orders(request):
     if request.user.is_authenticated and request.user.is_staff:
         orders = Order.objects.filter(shipped=False)
+        if request.POST:
+            num = request.POST['num']
+            now = datetime.datetime.now()
+            order = Order.objects.filter(id=num)
+            order.update(shipped=True, shipped_date=now)
+            messages.success(request, f"La orden #{num} ha sido marcada como enviada.")
+            return redirect('not_shipped_orders')
         return render(request, "payment/not_shipped_orders.html", {"orders": orders})
     else:
         messages.error(request, "No tienes permiso para ver esta página.")
@@ -17,6 +25,12 @@ def not_shipped_orders(request):
 def shipped_orders(request):
     if request.user.is_authenticated and request.user.is_staff:
         orders = Order.objects.filter(shipped=True)
+        if request.POST:
+            num = request.POST['num']
+            order = Order.objects.filter(id=num)
+            order.update(shipped=False, shipped_date=None)
+            messages.success(request, f"La orden #{num} ha sido marcada como no enviada.")
+            return redirect('shipped_orders')
         return render(request, "payment/shipped_orders.html", {"orders": orders})
     else:
         messages.error(request, "No tienes permiso para ver esta página.")

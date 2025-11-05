@@ -10824,3 +10824,344 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+/* 🌿 NAVBAR PERSONALIZADA (JPets) */
+.navbar {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Enlaces principales */
+.nav-link {
+  color: #f8f9fa !important;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #d1e7dd !important;
+}
+
+/* Subrayado animado */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #f8f9fa;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Botón del carrito */
+.btn-outline-dark {
+  border-color: #f8f9fa !important;
+  color: #f8f9fa !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-outline-dark:hover {
+  background-color: #198754 !important;
+  color: white !important;
+  border-color: #198754 !important;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item:hover {
+  background-color: #d1e7dd;
+  color: #0f5132 !important;
+}
+/* 🌿 HOME / PRODUCTOS */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen del producto */
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+/* Título y precio */
+.card-body h5 {
+  color: #198754;
+  font-weight: 600;
+}
+
+.card-body span {
+  color: #6c757d;
+}
+
+/* Badge Oferta */
+.badge.bg-dark {
+  background-color: #146c43 !important;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+/* Botón de producto */
+.card-footer .btn-outline-dark {
+  border-color: #198754 !important;
+  color: #198754 !important;
+  font-weight: 500;
+}
+
+.card-footer .btn-outline-dark:hover {
+  background-color: #198754 !important;
+  color: white !important;
+}
+
+/* Fondo de sección */
+section.py-5 {
+  background-color: #f8fdf9;
+}
+/* 🌿 PRODUCTO INDIVIDUAL */
+.card.p-4 {
+  border: none;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Imagen del producto */
+.card img {
+  border-radius: 12px;
+  object-fit: cover;
+  max-height: 350px;
+  transition: transform 0.3s ease;
+}
+
+.card img:hover {
+  transform: scale(1.03);
+}
+
+/* Título del producto */
+h2.fw-bold {
+  color: #146c43;
+}
+
+/* Precio */
+.text-success {
+  color: #198754 !important;
+}
+
+/* Botón Añadir al carrito */
+#add-cart {
+  background-color: #198754 !important;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#add-cart:hover {
+  background-color: #146c43 !important;
+}
+
+/* Botones de cantidad */
+.btn-outline-secondary {
+  border-color: #198754;
+  color: #198754;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #198754;
+  color: white;
+}
+
+/* Fondo de la página */
+body {
+  background-color: #f8fdf9;
+}
+/* 🌿 Formularios (Login / Registro) */
+.card form .form-control {
+  border-radius: 10px;
+  border: 1px solid #d4e9d9;
+  transition: all 0.3s ease;
+}
+
+.card form .form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.3);
+}
+
+.card form .btn-success {
+  background-color: #198754;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.card form .btn-success:hover {
+  background-color: #157347;
+}
+/* 🌿 Perfil de usuario */
+.card form .form-control {
+  border-radius: 10px;
+  border: 1px solid #d4e9d9;
+  transition: all 0.3s ease;
+}
+
+.card form .form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.3);
+}
+
+.btn-outline-success {
+  border-color: #198754;
+  color: #198754;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+  background-color: #198754;
+  color: white;
+}
+/* 🌿 Formulario de cambio de contraseña */
+.card form .form-control {
+  border-radius: 10px;
+  border: 1px solid #d4e9d9;
+  transition: all 0.3s ease;
+}
+
+.card form .form-control:focus {
+  border-color: #198754;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.3);
+}
+
+.btn-success {
+  background-color: #198754 !important;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+  background-color: #146c43 !important;
+}
+
+.card {
+  background-color: #ffffff;
+}
+/* 🌿 Carrito de compras */
+.card {
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+.card .btn-outline-success {
+  border-color: #198754;
+  color: #198754;
+  transition: all 0.3s ease;
+}
+
+.card .btn-outline-success:hover {
+  background-color: #198754;
+  color: white;
+}
+
+.card .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* 🌿 Administración de productos */
+.card img {
+  transition: transform 0.3s ease;
+}
+.card img:hover {
+  transform: scale(1.05);
+}
+
+.card .btn-outline-success:hover {
+  background-color: #198754;
+  color: white;
+}
+
+.card .btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+footer {
+  background-color: #14532d !important; /* verde oscuro */
+  color: #f8f9fa;
+}
+
+footer a:hover {
+  color: #a7f3d0; /* tono más claro al pasar el mouse */
+  transition: color 0.3s ease-in-out;
+}
+
+footer .bi {
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+/* --- Categorías --- */
+.category-header {
+  background: linear-gradient(135deg, #14532d, #1b5e20);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.category-header h1 {
+  color: #f8f9fa;
+  text-transform: capitalize;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+.hero-section {
+  background: 
+    linear-gradient(rgba(21, 71, 52, 0.6), rgba(21, 71, 52, 0.6)),
+    url("../assets/banner_pets.jpg") center/cover no-repeat;
+  height: 75vh;
+  color: #fff;
+}
+
+.hero-section h1 {
+  font-size: 2.8rem;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #e9f5ee;
+}
+
+.hero-section .btn {
+  background-color: #43a047;
+  border: none;
+  padding: 0.8rem 2rem;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.hero-section .btn:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}

@@ -1,48 +1,49 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
-{% block content%}
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Finaliza Tu Compra</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Ingresa tu información de facturación</p>
-        </div>
+{% block content %}
+<!-- Header -->
+<header class="bg-success py-5">
+    <div class="container px-4 px-lg-5 my-5 text-center text-white">
+        <h1 class="display-4 fw-bolder">Finaliza tu compra 🧾</h1>
+        <p class="lead fw-normal text-white-50 mb-0">
+            Ingresa tu información de facturación antes de procesar el pago.
+        </p>
     </div>
 </header>
-<br/>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div class="card text-center">
-                <div class="card-header">
-                    Informacion de Facturación
+
+<!-- Formulario de facturación -->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-header bg-success text-white fw-semibold">
+                        <i class="bi bi-receipt me-2"></i> Información de Facturación
+                    </div>
+                    <div class="card-body">
+                        <form id="billing-form" method="POST" action="{% url 'process_order' %}">
+                            {% csrf_token %}
+                            {{ billing_form.as_p }}
+                        </form>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form id="billing-form" method="POST" action="{% url 'process_order' %}">
-                        {% csrf_token %}
-                        {{ billing_form.as_p }}
-                    </form>
-                </div>       
+
+                <!-- Botones -->
+                <div class="card shadow border-0 rounded-4 mt-4 text-center py-3">
+                    <div class="d-flex justify-content-center gap-3">
+                        <button type="submit" form="billing-form" class="btn btn-success px-4 py-2">
+                            <i class="bi bi-credit-card-fill me-1"></i> Pagar Ahora
+                        </button>
+                        <a href="{% url 'cart_summary' %}" class="btn btn-outline-danger px-4 py-2">
+                            <i class="bi bi-x-circle me-1"></i> Cancelar
+                        </a>
+                    </div>
+                </div>
             </div>
-            
         </div>
     </div>
-</div>
-<br/>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div class="card text-center">
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="submit" form="billing-form" class="btn btn-success">Pagar Ahora</button>
-                    <a href="{% url 'cart_summary' %}" class="btn btn-danger">Cancelar</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>      
-<br/>
-{% endblock%}
+</section>
+{% endblock %}
+
+billing
