@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Tu Perfil</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Aquí puedes ver y editar la información de tu perfil.</p>
+        </div>
+    </div>
+</header>
+
+<style>
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+        border: 2px solid #ddd;
+    }
+</style>
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                {% if profile.profile_picture %}
+                    <img class="profile-pic mt-5" src="{{ profile.profile_picture.url }}" alt="Foto de perfil">
+                {% else %}
+                    <img class="profile-pic mt-5" src="https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-600nw-2470054311.jpg" alt="Foto por defecto">
+                {% endif %}
+                <span class="font-weight-bold">{{ profile.user.username }}</span>
+                <span class="text-black-50">{{ profile.user.email }}</span>
+                <span> </span>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Configuración del Perfil</h4>
+                </div>
+                <form method="POST" action="{% url 'update_user' %}">
+                    {% csrf_token %}
+                    {{ user_form.as_p }}
+                    <a href="{% url 'update_password' %}" class="btn btn-link">Cambiar Contraseña</a>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" name="update_user">Guardar Perfil</button></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <form method="POST" action="{% url 'update_user' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="mt-5 text-center"><button class="btn btn-outline-primary profile-button" type="submit" name="update_info">Guardar Info Adicional</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+

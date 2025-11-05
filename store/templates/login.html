@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Inicio de Sesión</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Inicia sesión con tu cuenta registrada.</p>
+        </div>
+    </div>
+</header>
+<br/><br/><br/>
+<div class="container px-4 px-lg-5 my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" name="username" placeholder="Ingresa tu nombre de Usuario" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" name="password" placeholder="Ingresa tu contraseña" required>
+                </div>
+                <br/><br/>
+                <button type="submit" class="btn btn-secondary">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br/><br/><br/>
+{% endblock %}
