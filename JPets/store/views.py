@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Product, Category, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -8,15 +8,11 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm, ProductForm
 from django import forms
 
-# @login_required
-# def update_info(request):
-#     current_user = Profile.objects.get(id=request.user.id)
-#     form = UserInfoForm(request.POST or None, request.FILES or None, instance=current_user)
-#     if form.is_valid():
-#         form.save()
-#         messages.success(request, "Perfil actualizado exitosamente 🐾")
-#         return redirect('update_user')
-#     return render(request, 'update_user.html', {'form': form})
+@user_passes_test(lambda u: u.is_staff)
+def edit_products(request):
+    products = Product.objects.all()
+    return render(request, 'edit_products.html', {'products': products})
+
 
 @user_passes_test(lambda u: u.is_staff)
 def add_product(request):
@@ -90,6 +86,25 @@ def category(request, category_name):
 def product(request, pk):
     product = Product.objects.get(id=pk)
     return render(request, 'product.html', {'product': product})
+
+def edit_product(request, pk):
+    product = Product.objects.get(id=pk)
+    form = ProductForm(request.POST or None, request.FILES or None, instance=product)
+    
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Producto actualizado correctamente.")
+        return redirect('edit_products')
+    return render(request, 'edit_product.html', {'form': form, 'product': product})
+
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    if request.method == "POST":
+        product.delete()
+        messages.success(request, "Producto eliminado correctamente.")
+        return redirect('edit_products')  # o donde tengas la lista de productos
+
 
 def home(request):
     products = Product.objects.all()

@@ -17,7 +17,13 @@
                 </li>
 
                 {% if user.is_staff %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'add_product' %}">Agregar Producto</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Administrar Productos</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'add_product' %}">Agregar Producto</a></li>
+                        <li><a class="dropdown-item" href="{% url 'edit_products' %}">Editar Productos</a></li>
+                    </ul>
+                </li>
                 {% endif %}
 
                 <li class="nav-item dropdown">
