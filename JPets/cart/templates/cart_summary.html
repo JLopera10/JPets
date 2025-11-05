@@ -64,7 +64,7 @@
         <!-- Total y botón de compra -->
         <div class="text-end mt-4">
             <h4 class="fw-bold">Total: ${{ cart_total|intcomma }}</h4>
-            <a href="#!" class="btn btn-success btn-lg mt-2">
+            <a href="{% url 'checkout' %}" class="btn btn-success btn-lg mt-2">
                 Finalizar Compra 💸
             </a>
         </div>

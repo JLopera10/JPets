@@ -24,6 +24,13 @@
                         <li><a class="dropdown-item" href="{% url 'edit_products' %}">Editar Productos</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ordenes</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'not_shipped_orders' %}">Ordenes No Enviadas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'shipped_orders' %}">Ordenes Enviadas</a></li>
+                    </ul>
+                </li>
                 {% endif %}
 
                 <li class="nav-item dropdown">
